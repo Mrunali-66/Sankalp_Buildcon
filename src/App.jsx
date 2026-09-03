@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import UtilityBar from './components/UtilityBar.jsx'
 import Header from './components/Header.jsx'
 import MobileMenu from './components/MobileMenu.jsx'
 import Hero from './components/Hero.jsx'
@@ -46,8 +45,6 @@ export default function App() {
 
   return (
     <>
-      <UtilityBar />
-
       <Header
         active={active}
         menuOpen={menuOpen}
