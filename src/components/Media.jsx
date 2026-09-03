@@ -9,10 +9,14 @@ export default function Media({ src, alt = '', className = '', as: Tag = 'div', 
 
   const classes = ['media', className, empty ? 'is-empty' : ''].filter(Boolean).join(' ')
 
+  // Resolve bare paths ("assets/x.jpg") from the site root so they work the
+  // same on nested routes like /projects/<slug> as they do on "/".
+  const url = /^(https?:|data:|\/)/.test(src) ? src : `/${src}`
+
   return (
     <Tag className={classes} data-src={src}>
       <img
-        src={src}
+        src={url}
         alt={alt}
         onError={() => setEmpty(true)}
         onLoad={(e) => { if (e.target.naturalWidth === 0) setEmpty(true) }}
