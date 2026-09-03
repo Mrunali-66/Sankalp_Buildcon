@@ -35,8 +35,8 @@ function useCounter(target, duration = 1800, start = false) {
 }
 
 export default function Hero({
-  buildingImage = 'assets/hero-building.jpg',
-  cardImage = 'assets/hero-card-thumb.jpg',
+  buildingImage = '/assets/hero-building.jpg',
+  cardImage = '/assets/hero-card-thumb.jpg',
 }) {
   const [statsVisible, setStatsVisible] = useState(false)
   const statsRef = useRef(null)
