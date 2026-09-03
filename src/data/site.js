@@ -4,13 +4,16 @@ export const NAV = [
   { id: 'home', label: 'Home' },
   { id: 'about', label: 'About Us' },
   { id: 'founder', label: 'Our Founder' },
-  { id: 'projects', label: 'Projects' },
+  { id: 'projects', label: 'Projects', href: '/projects' },
   { id: 'redevelopment', label: 'Redevelopment' },
-  { id: 'services', label: 'Services' },
+  { id: 'services', label: 'Services', href: '/services' },
   { id: 'quality', label: 'Quality & Specifications' },
   { id: 'gallery', label: 'Gallery' },
   { id: 'contact', label: 'Contact' },
 ]
+
+// Home-page anchor for a nav item, or a real route if it has one.
+export const navHref = (l) => l.href || `#${l.id}`
 
 export const PILLARS = [
   { h: 'Thoughtful planning', p: 'Layouts shaped around how families actually use a home day to day.' },
