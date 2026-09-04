@@ -1,5 +1,5 @@
 import Brand from './Brand.jsx'
-import { NAV } from '../data/site.js'
+import { NAV, navHref } from '../data/site.js'
 
 export default function MobileMenu({ open, onClose }) {
   return (
@@ -11,7 +11,7 @@ export default function MobileMenu({ open, onClose }) {
 
       <nav aria-label="Mobile primary">
         {NAV.map((l, i) => (
-          <a key={l.id} href={`#${l.id}`} onClick={onClose}>
+          <a key={l.id} href={navHref(l)} onClick={onClose}>
             <s>{String(i + 1).padStart(2, '0')}</s> {l.label}
           </a>
         ))}

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import Brand from './Brand.jsx'
-import { NAV } from '../data/site.js'
+import { NAV, navHref } from '../data/site.js'
 
 export default function Header({ active, onBurger, menuOpen }) {
   const [scrolled, setScrolled] = useState(false)
@@ -20,7 +20,7 @@ export default function Header({ active, onBurger, menuOpen }) {
 
         <nav className="nav-links" aria-label="Primary">
           {NAV.map((l) => (
-            <a key={l.id} href={`#${l.id}`} className={active === l.id ? 'on' : undefined}>
+            <a key={l.id} href={navHref(l)} className={active === l.id ? 'on' : undefined}>
               {l.label}
             </a>
           ))}
