@@ -5,40 +5,54 @@
 
 import fs from 'node:fs'
 import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 
 const DEFAULT_RECIPIENT = 'mrunalihajare5@gmail.com'
 const BRAND_NAME = 'Sankalp Buildcon'
+
+let __dirname = ''
+try {
+  __dirname = path.dirname(fileURLToPath(import.meta.url))
+} catch {
+  __dirname = process.cwd()
+}
 
 /**
  * Safely loads .env and .env.local into process.env if running in Node environment
  */
 export function loadEnvSafely() {
-  const cwd = process.cwd()
-  const candidateFiles = ['.env', '.env.local', '.env.development']
+  const searchDirs = [
+    process.cwd(),
+    path.resolve(__dirname, '..'),
+    __dirname,
+  ]
+  const candidateFiles = ['.env', '.env.local', '.env.development', '.env.development.local']
 
-  for (const file of candidateFiles) {
-    try {
-      const fullPath = path.resolve(cwd, file)
-      if (fs.existsSync(fullPath)) {
-        const content = fs.readFileSync(fullPath, 'utf-8')
-        for (const line of content.split(/\r?\n/)) {
-          const trimmed = line.trim()
-          if (!trimmed || trimmed.startsWith('#') || !trimmed.includes('=')) continue
-          const idx = trimmed.indexOf('=')
-          const key = trimmed.slice(0, idx).trim()
-          let val = trimmed.slice(idx + 1).trim()
-          if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
-            val = val.slice(1, -1)
-          } else {
-            val = val.replace(/\s+#.*$/, '').trim()
-          }
-          if (key && val) {
-            process.env[key] = val
+  for (const dir of searchDirs) {
+    for (const file of candidateFiles) {
+      try {
+        const fullPath = path.resolve(dir, file)
+        if (fs.existsSync(fullPath) && fs.statSync(fullPath).isFile()) {
+          const content = fs.readFileSync(fullPath, 'utf-8')
+          for (const line of content.split(/\r?\n/)) {
+            const trimmed = line.trim()
+            if (!trimmed || trimmed.startsWith('#') || !trimmed.includes('=')) continue
+            const idx = trimmed.indexOf('=')
+            const key = trimmed.slice(0, idx).trim()
+            let val = trimmed.slice(idx + 1).trim()
+            if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
+              val = val.slice(1, -1)
+            } else {
+              val = val.replace(/\s+#.*$/, '').trim()
+            }
+            if (key && val) {
+              process.env[key] = val
+            }
           }
         }
+      } catch {
+        // Ignore if filesystem is read-only or in edge environments
       }
-    } catch {
-      // Ignore if filesystem is read-only or in edge environments
     }
   }
 }

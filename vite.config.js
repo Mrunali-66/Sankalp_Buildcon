@@ -1,18 +1,13 @@
 import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react'
-import { processContactEnquiry } from './api/contact.js'
+import { processContactEnquiry, loadEnvSafely } from './api/contact.js'
 
 function contactApiPlugin() {
   const handler = async (req, res, next) => {
     const url = req.url.split('?')[0]
     if (url === '/api/contact' && req.method === 'POST') {
       // Dynamically load environment variables from .env if present
-      try {
-        const env = loadEnv('development', process.cwd(), '')
-        Object.assign(process.env, env)
-      } catch (err) {
-        console.warn('[Vite Contact API] Error loading env:', err.message)
-      }
+      loadEnvSafely()
 
       let body = ''
       req.on('data', (chunk) => {
@@ -51,6 +46,14 @@ function contactApiPlugin() {
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
   Object.assign(process.env, env)
+  loadEnvSafely()
+
+  const hasResend = Boolean(process.env.RESEND_API_KEY || process.env.EMAIL_API_KEY)
+  console.log('\n--- Sankalp Buildcon API Environment Status ---')
+  console.log(`  RESEND_API_KEY detected: ${hasResend ? 'Yes' : 'No'}`)
+  console.log(`  CONTACT_EMAIL: ${process.env.CONTACT_EMAIL || 'mrunalihajare5@gmail.com (default)'}`)
+  console.log(`  FROM_EMAIL: ${process.env.FROM_EMAIL || 'Sankalp Buildcon <onboarding@resend.dev> (default)'}`)
+  console.log('------------------------------------------------\n')
 
   return {
     plugins: [react(), contactApiPlugin()],
