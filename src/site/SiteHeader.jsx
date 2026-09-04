@@ -21,8 +21,8 @@ function Logo() {
     <Link to="/" className="m-brand" aria-label="Sankalp Buildcon — home">
       <img src={src} alt="Sankalp Buildcon" onError={() => setSrc(MARK)} />
       <span className="m-brand-txt">
-        <span className="m-brand-name">Sankalp Buildcon</span>
-        <span className="m-brand-tag">Building Trust. Creating Better Futures.</span>
+        <span className="m-brand-name">SANKALP</span>
+        <span className="m-brand-subname">BUILDCON</span>
       </span>
     </Link>
   )

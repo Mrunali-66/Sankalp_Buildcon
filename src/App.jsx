@@ -13,6 +13,7 @@ import Commitments from './components/Commitments.jsx'
 import Gallery from './components/Gallery.jsx'
 import Contact from './components/Contact.jsx'
 import Footer from './components/Footer.jsx'
+import FloatingSocials from './components/FloatingSocials.jsx'
 import useScrollSpy from './hooks/useScrollSpy.js'
 import useBodyLock from './hooks/useBodyLock.js'
 import { NAV } from './data/site.js'
@@ -156,6 +157,7 @@ export default function App() {
       )}
 
       <Footer onOpen={navigateToProject} />
+      <FloatingSocials />
     </>
   )
 }

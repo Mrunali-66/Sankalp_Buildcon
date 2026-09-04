@@ -89,12 +89,12 @@ section, [id], div[id], .mod[id], .srv-page, .qp-page{scroll-margin-top:76px !im
    SITE HEADER
    ========================================================================== */
 .m-head{position:sticky;top:0;z-index:80;background:#fff;border-bottom:1px solid var(--line)}
-.m-head-in{display:flex;align-items:center;justify-content:space-between;gap:24px;height:78px}
-.m-brand{display:flex;align-items:center;gap:12px}
-.m-brand img{height:46px;width:auto}
-.m-brand .m-brand-txt{display:flex;flex-direction:column;line-height:1.05}
-.m-brand .m-brand-name{font-family:var(--font);font-weight:800;font-size:18px;letter-spacing:.01em;color:var(--navy)}
-.m-brand .m-brand-tag{font-size:10.5px;font-weight:500;color:var(--slate-soft);letter-spacing:.02em;margin-top:3px}
+.m-head-in{display:flex;align-items:center;justify-content:space-between;gap:24px;height:104px}
+.m-brand{display:flex;align-items:center;gap:6px}
+.m-brand img{height:120px;width:auto}
+.m-brand .m-brand-txt{display:flex;flex-direction:column;align-items:center;line-height:1.1}
+.m-brand .m-brand-name{font-family:var(--font);font-weight:800;font-size:30px;letter-spacing:.08em;color:var(--navy);text-align:center}
+.m-brand .m-brand-subname{display:block;font-family:var(--font);font-weight:700;font-size:13px;letter-spacing:.35em;color:var(--blue);text-align:center;margin-top:3px}
 .m-nav{display:flex;align-items:center;gap:20px}
 .mod .m-nav a{
   font-family:var(--font);font-weight:500;font-size:13.5px;color:var(--ink);

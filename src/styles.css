@@ -202,11 +202,11 @@ h2.title em{font-style:italic;font-weight:300}
   gap:24px;
   max-width:100%;
 }
-.brand{display:flex;align-items:center;gap:12px;text-decoration:none;flex-shrink:0}
-.brand img{height:38px;width:auto}
+.brand{display:flex;align-items:center;gap:6px;text-decoration:none;flex-shrink:0}
+.brand img{height:110px;width:auto}
 .brand .bt{display:flex;flex-direction:column;line-height:1}
-.brand .b1{font-size:16px;font-weight:700;letter-spacing:.08em;color:#0a2240}
-.brand .b2{font-size:9px;font-weight:600;letter-spacing:.22em;color:#1868db;margin-top:3px}
+.brand .b1{font-size:28px;font-weight:700;letter-spacing:.08em;color:#0a2240}
+.brand .b2{font-size:12px;font-weight:600;letter-spacing:.22em;color:#1868db;margin-top:4px}
 
 .nav-links{display:flex;align-items:center;gap:22px}
 .nav-links a{
@@ -4004,5 +4004,128 @@ h2.title em{font-style:italic;font-weight:300}
   }
   .pdetail-related-grid{
     grid-template-columns:1fr;
+  }
+}
+
+/* ==========================================================================
+   FLOATING CONTACT & SOCIAL BAR (Right Side)
+   WhatsApp, Instagram, Email
+   ========================================================================== */
+.floating-socials-bar {
+  position: fixed;
+  right: 24px;
+  bottom: 30px;
+  z-index: 9990;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-end;
+}
+
+.floating-btn {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  text-decoration: none;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.22);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease, background 0.3s ease;
+  backdrop-filter: blur(8px);
+}
+
+.floating-btn:hover {
+  transform: scale(1.12) translateY(-3px);
+}
+
+.floating-icon {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+/* WhatsApp Button */
+.floating-btn--wa {
+  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+  box-shadow: 0 8px 20px rgba(37, 211, 102, 0.38);
+}
+.floating-btn--wa:hover {
+  box-shadow: 0 12px 28px rgba(37, 211, 102, 0.55);
+}
+
+/* Instagram Button */
+.floating-btn--ig {
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  box-shadow: 0 8px 20px rgba(220, 39, 67, 0.38);
+}
+.floating-btn--ig:hover {
+  box-shadow: 0 12px 28px rgba(220, 39, 67, 0.55);
+}
+
+/* Email Button */
+.floating-btn--mail {
+  background: linear-gradient(135deg, #0B2E71 0%, #1868DB 100%);
+  box-shadow: 0 8px 20px rgba(24, 104, 219, 0.38);
+}
+.floating-btn--mail:hover {
+  box-shadow: 0 12px 28px rgba(24, 104, 219, 0.55);
+}
+
+/* Slide-out Tooltip */
+.floating-tooltip {
+  position: absolute;
+  right: 60px;
+  top: 50%;
+  transform: translateY(-50%) translateX(10px);
+  background: rgba(6, 23, 55, 0.92);
+  color: #ffffff;
+  font-family: var(--sans);
+  font-size: 12.5px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 20px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.floating-tooltip::after {
+  content: '';
+  position: absolute;
+  right: -5px;
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
+  width: 8px;
+  height: 8px;
+  background: rgba(6, 23, 55, 0.92);
+}
+
+.floating-btn:hover .floating-tooltip {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+@media (max-width: 768px) {
+  .floating-socials-bar {
+    right: 16px;
+    bottom: 20px;
+    gap: 10px;
+  }
+  .floating-btn {
+    width: 44px;
+    height: 44px;
+  }
+  .floating-icon {
+    width: 20px;
+    height: 20px;
+  }
+  .floating-tooltip {
+    display: none;
   }
 }
