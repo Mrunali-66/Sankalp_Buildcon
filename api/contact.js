@@ -3,8 +3,48 @@
  * Validates enquiry form submissions and sends emails via Resend API.
  */
 
+import fs from 'node:fs'
+import path from 'node:path'
+
 const DEFAULT_RECIPIENT = 'mrunalihajare5@gmail.com'
 const BRAND_NAME = 'Sankalp Buildcon'
+
+/**
+ * Safely loads .env and .env.local into process.env if running in Node environment
+ */
+export function loadEnvSafely() {
+  const cwd = process.cwd()
+  const candidateFiles = ['.env', '.env.local', '.env.development']
+
+  for (const file of candidateFiles) {
+    try {
+      const fullPath = path.resolve(cwd, file)
+      if (fs.existsSync(fullPath)) {
+        const content = fs.readFileSync(fullPath, 'utf-8')
+        for (const line of content.split(/\r?\n/)) {
+          const trimmed = line.trim()
+          if (!trimmed || trimmed.startsWith('#') || !trimmed.includes('=')) continue
+          const idx = trimmed.indexOf('=')
+          const key = trimmed.slice(0, idx).trim()
+          let val = trimmed.slice(idx + 1).trim()
+          if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
+            val = val.slice(1, -1)
+          } else {
+            val = val.replace(/\s+#.*$/, '').trim()
+          }
+          if (key && val) {
+            process.env[key] = val
+          }
+        }
+      }
+    } catch {
+      // Ignore if filesystem is read-only or in edge environments
+    }
+  }
+}
+
+// Initial environment load
+loadEnvSafely()
 
 function sanitizeHtml(str = '') {
   return String(str)
@@ -234,6 +274,8 @@ ${dateString}
  * Sends email via Resend API
  */
 export async function sendEmailWithProvider({ to, replyTo, subject, html, text }) {
+  loadEnvSafely()
+
   const apiKey = process.env.RESEND_API_KEY || process.env.EMAIL_API_KEY
   const fromEmail = process.env.FROM_EMAIL || `${BRAND_NAME} <onboarding@resend.dev>`
 
@@ -283,6 +325,8 @@ export async function sendEmailWithProvider({ to, replyTo, subject, html, text }
  * Main handler logic for contact form submission
  */
 export async function processContactEnquiry(body) {
+  loadEnvSafely()
+
   const { isValid, errors, sanitized } = validateEnquiryData(body || {})
 
   if (!isValid) {
@@ -346,6 +390,8 @@ export async function processContactEnquiry(body) {
  * Standard Vercel / Node serverless handler
  */
 export default async function handler(req, res) {
+  loadEnvSafely()
+
   if (req.method === 'OPTIONS') {
     res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS')
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
