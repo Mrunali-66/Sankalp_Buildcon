@@ -20,7 +20,7 @@ try {
 /**
  * Safely loads .env and .env.local into process.env if running in Node environment
  */
-export function loadEnvSafely() {
+export function loadEnvSafely(override = false) {
   const searchDirs = [
     process.cwd(),
     path.resolve(__dirname, '..'),
@@ -46,7 +46,9 @@ export function loadEnvSafely() {
               val = val.replace(/\s+#.*$/, '').trim()
             }
             if (key && val) {
-              process.env[key] = val
+              if (override || !process.env[key]) {
+                process.env[key] = val
+              }
             }
           }
         }
@@ -290,7 +292,9 @@ ${dateString}
 export async function sendEmailWithProvider({ to, replyTo, subject, html, text }) {
   loadEnvSafely()
 
-  const apiKey = process.env.RESEND_API_KEY || process.env.EMAIL_API_KEY
+  const rawKey = (process.env.RESEND_API_KEY || process.env.EMAIL_API_KEY || '').trim()
+  const isPlaceholder = rawKey.includes('PASTE') || rawKey.includes('YOUR_') || rawKey.includes('your_')
+  const apiKey = isPlaceholder ? '' : rawKey
   const fromEmail = process.env.FROM_EMAIL || `${BRAND_NAME} <onboarding@resend.dev>`
 
   if (!apiKey) {

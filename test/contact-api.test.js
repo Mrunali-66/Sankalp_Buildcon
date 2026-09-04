@@ -90,10 +90,9 @@ console.log('🧪 Starting Contact Enquiry Unit & Integration Tests...\n')
   console.log('✅ Test 5 Passed: HTML & Text email templates formatted accurately.')
 }
 
-// Test 6: Missing API Key returns failure and does NOT fake success
+// Test 6: Missing / Placeholder API Key returns failure
 {
-  delete process.env.RESEND_API_KEY
-  delete process.env.EMAIL_API_KEY
+  process.env.RESEND_API_KEY = 're_PASTE_MY_REAL_RESEND_API_KEY_HERE'
   process.env.CONTACT_EMAIL = 'mrunalihajare5@gmail.com'
 
   const result = await processContactEnquiry({
@@ -104,15 +103,14 @@ console.log('🧪 Starting Contact Enquiry Unit & Integration Tests...\n')
     message: 'Hello, testing enquiry submission.',
   })
 
-  assert.strictEqual(result.statusCode, 500, 'Missing API key should return 500 status')
+  assert.strictEqual(result.statusCode, 500, 'Missing/placeholder API key should return 500 status')
   assert.strictEqual(result.body.success, false, 'Missing API key must not report success')
   assert.ok(result.body.error.includes('RESEND_API_KEY'), 'Error must mention missing RESEND_API_KEY')
-  console.log('✅ Test 6 Passed: Missing API key strictly returns error (no false success).')
+  console.log('✅ Test 6 Passed: Missing/placeholder API key strictly returns error (no false success).')
 }
 
 // Test 7: Mocked Provider Success & Error Handling
 {
-  // Test with simulated API response
   const originalFetch = globalThis.fetch
 
   // Simulate API failure
@@ -121,7 +119,7 @@ console.log('🧪 Starting Contact Enquiry Unit & Integration Tests...\n')
     status: 403,
     json: async () => ({ message: 'Invalid API Key' }),
   })
-  process.env.RESEND_API_KEY = 're_test_invalid_key'
+  process.env.RESEND_API_KEY = 're_live_valid_format_key_12345'
 
   const failResult = await processContactEnquiry({
     name: 'Mrunali Hajare',
