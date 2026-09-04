@@ -2,12 +2,17 @@ import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react'
 import { processContactEnquiry } from './api/contact.js'
 
-function contactApiPlugin(env) {
+function contactApiPlugin() {
   const handler = async (req, res, next) => {
     const url = req.url.split('?')[0]
     if (url === '/api/contact' && req.method === 'POST') {
-      // Merge loaded env into process.env
-      Object.assign(process.env, env)
+      // Dynamically load environment variables from .env if present
+      try {
+        const env = loadEnv('development', process.cwd(), '')
+        Object.assign(process.env, env)
+      } catch (err) {
+        console.warn('[Vite Contact API] Error loading env:', err.message)
+      }
 
       let body = ''
       req.on('data', (chunk) => {
@@ -45,7 +50,9 @@ function contactApiPlugin(env) {
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
+  Object.assign(process.env, env)
+
   return {
-    plugins: [react(), contactApiPlugin(env)],
+    plugins: [react(), contactApiPlugin()],
   }
 })

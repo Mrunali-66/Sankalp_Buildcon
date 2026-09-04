@@ -7,6 +7,29 @@ import { processContactEnquiry } from './api/contact.js'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
+// Securely load .env in Node runtime if file exists
+const envPath = path.join(__dirname, '.env')
+if (fs.existsSync(envPath)) {
+  try {
+    if (typeof process.loadEnvFile === 'function') {
+      process.loadEnvFile(envPath)
+    } else {
+      const content = fs.readFileSync(envPath, 'utf-8')
+      content.split('\n').forEach((line) => {
+        const trimmed = line.trim()
+        if (trimmed && !trimmed.startsWith('#') && trimmed.includes('=')) {
+          const idx = trimmed.indexOf('=')
+          const key = trimmed.slice(0, idx).trim()
+          const val = trimmed.slice(idx + 1).trim().replace(/^['"](.*)['"]$/, '$1')
+          if (!process.env[key]) process.env[key] = val
+        }
+      })
+    }
+  } catch (err) {
+    console.warn('[Server] Could not load .env file:', err.message)
+  }
+}
+
 const PORT = process.env.PORT || 3000
 const DIST_DIR = path.join(__dirname, 'dist')
 
