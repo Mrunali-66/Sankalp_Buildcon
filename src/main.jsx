@@ -6,6 +6,8 @@ import Layout from './site/Layout.jsx'
 import ProjectsPage from './pages/ProjectsPage.jsx'
 import ProjectDetailPage from './pages/ProjectDetailPage.jsx'
 import ServicesPage from './pages/ServicesPage.jsx'
+import QualityPage from './pages/QualityPage.jsx'
+import ContactPage from './pages/ContactPage.jsx'
 import './styles.css'
 
 const router = createBrowserRouter([
@@ -16,6 +18,8 @@ const router = createBrowserRouter([
       { path: '/projects', element: <ProjectsPage /> },
       { path: '/projects/:slug', element: <ProjectDetailPage /> },
       { path: '/services', element: <ServicesPage /> },
+      { path: '/quality', element: <QualityPage /> },
+      { path: '/contact', element: <ContactPage /> },
     ],
   },
 ])

@@ -11,9 +11,9 @@ const LINKS = [
   { label: 'Projects', to: '/projects' },
   { label: 'Redevelopment', href: '/#redevelopment' },
   { label: 'Services', to: '/services' },
-  { label: 'Quality & Specifications', href: '/#quality' },
+  { label: 'Quality & Specifications', to: '/quality' },
   { label: 'Gallery', href: '/#gallery' },
-  { label: 'Contact', href: '/#contact' },
+  { label: 'Contact', to: '/contact' },
 ]
 
 function Logo() {
@@ -54,9 +54,9 @@ export default function SiteHeader() {
         <nav className="m-nav" aria-label="Primary">
           <NavItems />
         </nav>
-        <a href="/#contact" className="m-btn m-btn--solid">
+        <Link to="/contact" className="m-btn m-btn--solid">
           Contact Us <IconArrow />
-        </a>
+        </Link>
         <button
           className="m-burger"
           aria-label="Menu"
@@ -69,9 +69,9 @@ export default function SiteHeader() {
 
       <div className={`m-mobnav${open ? ' open' : ''}`}>
         <NavItems onClick={close} />
-        <a href="/#contact" className="m-btn m-btn--solid" onClick={close}>
+        <Link to="/contact" className="m-btn m-btn--solid" onClick={close}>
           Contact Us <IconArrow />
-        </a>
+        </Link>
       </div>
     </header>
   )

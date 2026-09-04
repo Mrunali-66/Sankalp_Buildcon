@@ -69,13 +69,11 @@ export const COMMIT_SUB = [
 ]
 
 export const PLATES = [
-  { g: 'ongoing', cls: 'p-wide', src: 'assets/projects/premraj-vihar-1.jpg', alt: 'Premraj Vihar 2.0 elevation', cap: 'Premraj Vihar 2.0 · Elevation', no: '01' },
-  { g: 'upcoming', cls: 'p-narrow p-tall', src: 'assets/projects/shree-krupa-1.jpg', alt: 'Shree Krupa site', cap: 'Shree Krupa · Site', no: '02' },
-  { g: 'progress', cls: 'p-off', src: 'assets/gallery/progress-1.jpg', alt: 'Structure work in progress', cap: 'Structure work in progress', no: '03' },
-  { g: 'ongoing', cls: '', src: 'assets/projects/premraj-vihar-2.jpg', alt: 'Premraj Vihar 2.0 site view', cap: 'Premraj Vihar 2.0 · Site view', no: '04' },
-  { g: 'upcoming', cls: '', src: 'assets/projects/shree-krupa-2.jpg', alt: 'Shree Krupa existing structure', cap: 'Shree Krupa · Existing structure', no: '05' },
-  { g: 'progress', cls: 'p-narrow', src: 'assets/gallery/progress-2.jpg', alt: 'Slab work', cap: 'Slab work', no: '06' },
-  { g: 'progress', cls: 'p-wide', src: 'assets/gallery/progress-3.jpg', alt: 'Finishing works', cap: 'Finishing works', no: '07' },
+  { g: 'ongoing', cls: 'p-narrow p-tall', src: 'assets/gallery/elevation-building.jpg', alt: 'Premraj Vihar 2.0 Architectural Elevation', cap: 'Premraj Vihar 2.0 · Architectural Elevation', no: '01' },
+  { g: 'ongoing', cls: 'p-wide', src: 'assets/gallery/rooftop-aerial.jpg', alt: 'Rooftop Garden & Amenities Aerial View', cap: 'Rooftop Amenities & Terrace Layout', no: '02' },
+  { g: 'progress', cls: 'p-wide', src: 'assets/gallery/site-plan-top.jpg', alt: 'Master Site Plan & Landscape Layout', cap: 'Master Site Layout & Landscape Plan', no: '03' },
+  { g: 'upcoming', cls: 'p-narrow', src: 'assets/projects/shree-krupa-1.jpg', alt: 'Shree Krupa Co-Op Society site', cap: 'Shree Krupa · Site Plan', no: '04' },
+  { g: 'progress', cls: '', src: 'assets/gallery/elevation-building.jpg', alt: 'Structure Work View', cap: 'Facade & Structure Detail', no: '05' },
 ]
 
 export const PROJECT_OPTIONS = [

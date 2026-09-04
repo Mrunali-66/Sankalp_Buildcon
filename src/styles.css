@@ -73,8 +73,13 @@ ul,ol{list-style:none}
 }
 .band--dark .ref{color:#5A7593}
 h2.title{
-  font-family:var(--serif);font-weight:200;font-size:clamp(32px,4.6vw,60px);
-  line-height:1.04;letter-spacing:-.018em;color:var(--navy);max-width:22ch;
+  font-family:var(--font), 'Plus Jakarta Sans', sans-serif;
+  font-weight:800;
+  font-size:clamp(30px,4.2vw,52px);
+  line-height:1.12;
+  letter-spacing:-.025em;
+  color:var(--navy);
+  max-width:22ch;
 }
 .band--dark h2.title{color:#fff}
 h2.title em{font-style:italic;font-weight:300}
@@ -585,7 +590,7 @@ h2.title em{font-style:italic;font-weight:300}
 
 .stats-glass-grid{
   display:grid;
-  grid-template-columns:repeat(4, 1fr);
+  grid-template-columns:repeat(4, minmax(0, 1fr));
   gap:16px;
   background:rgba(255, 255, 255, 0.04);
   border:1px solid rgba(255, 255, 255, 0.12);
@@ -602,6 +607,7 @@ h2.title em{font-style:italic;font-weight:300}
   gap:14px;
   padding:6px 14px;
   border-right:1px solid rgba(255, 255, 255, 0.1);
+  min-width:0;
 }
 
 .stat-glass-card:last-child{
@@ -624,6 +630,7 @@ h2.title em{font-style:italic;font-weight:300}
 .stat-card-content{
   display:flex;
   flex-direction:column;
+  min-width:0;
 }
 
 .stat-card-label{
@@ -632,6 +639,9 @@ h2.title em{font-style:italic;font-weight:300}
   letter-spacing:0.12em;
   text-transform:uppercase;
   color:#8faed4;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
 }
 
 .stat-card-value{
@@ -785,30 +795,114 @@ h2.title em{font-style:italic;font-weight:300}
 /* ==========================================================================
    FOUNDER
    ========================================================================== */
-.founder{display:grid;grid-template-columns:var(--rail) minmax(0,.72fr) minmax(0,1.28fr);gap:0 34px;margin-top:56px;align-items:start}
-.founder-figure{grid-column:2}
-.founder-figure .media{aspect-ratio:4/5;border:1px solid rgba(255,255,255,0.7);box-shadow:0 16px 40px rgba(10,34,64,0.08)}
+.founder{
+  display:grid;
+  grid-template-columns:minmax(340px, 440px) 1fr;
+  gap:40px;
+  margin-top:44px;
+  align-items:stretch;
+}
+
+.founder-figure{
+  grid-column:1;
+  width:100%;
+  height:100%;
+}
+
+.founder-figure .media{
+  width:100%;
+  height:100%;
+  min-height:460px;
+  aspect-ratio:3/4;
+  border-radius:24px;
+  overflow:hidden;
+  border:1px solid rgba(24,104,219,0.15);
+  box-shadow:0 20px 50px rgba(10,34,64,0.12);
+  background:#f0f5fe;
+}
+
+.founder-figure img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center 10%;
+  border-radius:24px;
+  display:block;
+}
+
 .founder-said{
-  grid-column:3;
-  background:rgba(255, 255, 255, 0.7);
-  backdrop-filter:blur(32px) saturate(140%);
-  -webkit-backdrop-filter:blur(32px) saturate(140%);
-  border:1px solid rgba(255, 255, 255, 0.6);
-  border-radius:20px;
-  padding:36px;
-  box-shadow:0 16px 44px rgba(10, 34, 64, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  grid-column:2;
+  background:#ffffff;
+  border:1px solid rgba(24,104,219,0.12);
+  border-radius:24px;
+  padding:clamp(30px, 4vw, 44px);
+  box-shadow:0 18px 48px rgba(10,34,64,0.06);
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
 }
+
 .founder-said blockquote{
-  font-family:var(--serif);font-weight:200;font-size:clamp(25px,3.1vw,40px);
-  line-height:1.24;letter-spacing:-.015em;color:var(--navy);
+  font-family:var(--font), 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight:700;
+  font-size:clamp(20px, 2.3vw, 27px);
+  line-height:1.36;
+  letter-spacing:-.02em;
+  color:var(--navy);
+  margin:0 0 24px 0;
+  position:relative;
 }
-.founder-said blockquote::before{content:"\201C";margin-left:-.4em}
-.founder-said blockquote::after{content:"\201D"}
-.founder-said .body{margin-top:30px;color:var(--steel);max-width:58ch}
+
+.founder-said blockquote::before,
+.founder-said blockquote::after{
+  content:none !important;
+  display:none !important;
+}
+
+.founder-said .body{
+  color:var(--steel);
+  font-size:15.5px;
+  line-height:1.75;
+  max-width:62ch;
+}
+
 .founder-said .body p+p{margin-top:16px}
-.sig{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-top:38px;padding-top:22px;border-top:1px solid var(--rule-soft)}
-.sig .who{font-size:19px;font-weight:600;color:var(--navy)}
-.sig .role{font-size:11.5px;font-weight:600;letter-spacing:.13em;color:var(--steel);margin-top:6px}
+
+.sig{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:20px;
+  flex-wrap:wrap;
+  margin-top:36px;
+  padding-top:22px;
+  border-top:1px solid var(--rule-soft);
+}
+
+.sig .who{
+  font-family:var(--font), 'Plus Jakarta Sans', sans-serif;
+  font-size:19px;
+  font-weight:800;
+  color:var(--navy);
+}
+
+.sig .role{
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:#1868db;
+  margin-top:4px;
+}
+
+@media (max-width: 900px) {
+  .founder{
+    grid-template-columns:1fr;
+    gap:28px;
+  }
+  .founder-figure{grid-column:1}
+  .founder-said{grid-column:1}
+}
 
 /* ==========================================================================
    PROJECTS — one featured sheet, then a register
@@ -969,10 +1063,23 @@ h2.title em{font-style:italic;font-weight:300}
 .plate.p-wide{grid-column:span 8}
 .plate.p-narrow{grid-column:span 4}
 .plate.p-off{grid-column:3/span 5}
-.plate .media{aspect-ratio:4/3;border:1px solid rgba(255,255,255,0.7);box-shadow:0 16px 40px rgba(10,34,64,0.08)}
+.plate .media{
+  aspect-ratio:4/3;
+  border-radius:16px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,0.7);
+  box-shadow:0 16px 40px rgba(10,34,64,0.08);
+}
 .plate.p-tall .media{aspect-ratio:3/4}
-.plate figcaption{display:flex;justify-content:space-between;gap:14px;margin-top:12px;font-size:12px;letter-spacing:.05em;color:var(--steel)}
-.plate figcaption s{color:var(--silver);text-decoration:none}
+.plate .media img{
+  width:100%;height:100%;
+  object-fit:cover;
+  display:block;
+  transition:transform .4s cubic-bezier(0.16,1,0.3,1);
+}
+.plate:hover .media img{transform:scale(1.04)}
+.plate figcaption{display:flex;justify-content:space-between;gap:14px;margin-top:14px;font-size:13px;font-weight:600;letter-spacing:.02em;color:var(--navy)}
+.plate figcaption s{color:var(--silver);text-decoration:none;font-weight:500}
 .plate[hidden]{display:none}
 
 /* ==========================================================================

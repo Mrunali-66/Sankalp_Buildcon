@@ -7,38 +7,32 @@ export default function Founder() {
         <div className="head">
           <div className="ref">02 / Founder</div>
           <div className="head-flow">
-            <h2 className="title">A company is judged<br />on what it hands over.</h2>
+            <h2 className="title">A Vision That<br />Became a Foundation.</h2>
           </div>
         </div>
 
         <div className="founder">
           <figure className="founder-figure">
-            <Media src="assets/founder.jpg" alt="Founder, Sankalp Buildcon" />
+            <Media src="assets/founder.jpg" alt="Mr. Sandip Chandrakant Shitole — Founder & Director, Sankalp Buildcon" />
           </figure>
 
           <div className="founder-said">
             <blockquote>
-              At Sankalp Buildcon, our vision is not simply to construct buildings, but to
-              create spaces that earn trust and add value for generations.
+              “Our goal is not just to construct buildings. Our goal is to create spaces that bring comfort, security, value and a better future for the people who live in them.”
             </blockquote>
             <div className="body">
               <p>
-                The company was founded in 2012 on a straightforward belief — that
-                construction is a long-term commitment to the people who will live in what you
-                build, not a transaction that ends at possession.
+                Mr. Sandip Chandrakant Shitole is the Founder &amp; Director of Sankalp Buildcon. With determination, hard work and a vision to build something meaningful in the construction industry, he established Sankalp Buildcon in 2012.
               </p>
               <p>
-                That belief still decides how projects are selected, planned and delivered:
-                fewer developments, closer supervision, and honest conversations with every
-                family and society we work with.
+                His journey represents the belief that success is not built overnight—it is created through consistent effort, responsibility and trust. Under his leadership, Sankalp Buildcon continues to move forward with a vision of creating quality developments and building long-term relationships with customers and communities.
               </p>
             </div>
             <div className="sig">
               <div>
-                <div className="who pending">[Founder Name]</div>
-                <div className="role">Founder &amp; Managing Director</div>
+                <div className="who">Mr. Sandip Chandrakant Shitole</div>
+                <div className="role">Founder &amp; Director, Sankalp Buildcon</div>
               </div>
-              <p className="note">Founder biography and photograph — awaiting final content</p>
             </div>
           </div>
         </div>
