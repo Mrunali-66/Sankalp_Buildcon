@@ -21,24 +21,22 @@ const STATS = [
 ]
 
 function ProjectCard({ p }) {
+  const chips = [p.homes, p.floors, p.projectType].filter(Boolean)
   return (
     <article className="m-proj">
       <div className="m-proj-media">
         <span className={`m-pill m-pill--${p.status}`}>{p.statusLabel}</span>
-        <Media src={p.cover} alt={`${p.name}, ${p.where}`} />
+        <Media src={p.image} alt={`${p.name}, ${p.location}`} />
       </div>
       <div className="m-proj-body">
         <h3>{p.name}</h3>
-        <p className="m-proj-where"><IconPin /> {p.where}</p>
+        <p className="m-proj-where"><IconPin /> {p.location}</p>
         <div className="m-proj-facts">
-          {p.facts
-            .filter((f) => !f.pending && !['Status', 'Location'].includes(f.dt))
-            .slice(0, 3)
-            .map((f) => (
-              <span className="m-chip" key={f.dt}>{f.dd}</span>
-            ))}
+          {chips.slice(0, 3).map((c) => (
+            <span className="m-chip" key={c}>{c}</span>
+          ))}
         </div>
-        <p className="m-proj-lead">{p.lead}</p>
+        <p className="m-proj-lead">{p.description}</p>
         <Link to={`/projects/${p.slug}`} className="m-link">
           View project details <IconArrow />
         </Link>
@@ -50,9 +48,6 @@ function ProjectCard({ p }) {
 export default function ProjectsPage() {
   const [filter, setFilter] = useState('all')
   const shown = PROJECTS.filter((p) => filter === 'all' || p.status === filter)
-  const showCompletedNote =
-    (filter === 'all' || filter === 'completed') &&
-    !PROJECTS.some((p) => p.status === 'completed')
 
   return (
     <>
@@ -62,9 +57,8 @@ export default function ProjectsPage() {
           <span className="m-eyebrow">Our Projects</span>
           <h1>Built with care. <span>Made to last.</span></h1>
           <p>
-            A growing portfolio across Old Sangvi and the wider PCMC area — from developments
-            under construction to projects in planning. Details are published here as each
-            one is confirmed.
+            A growing portfolio across Old Sangvi, New Sangvi and the wider PCMC area — from
+            completed residences to developments currently under construction.
           </p>
         </div>
       </section>
@@ -86,12 +80,12 @@ export default function ProjectsPage() {
           <div className="m-projects">
             {shown.map((p) => <ProjectCard key={p.slug} p={p} />)}
 
-            {showCompletedNote && (
+            {shown.length === 0 && (
               <article className="m-proj m-proj--empty">
-                <h3>Completed projects</h3>
+                <h3>Nothing here yet</h3>
                 <p>
-                  Names, locations and photographs of earlier completed developments will be
-                  listed here once confirmed with the team.
+                  No {filter} projects to show right now. New developments are added here as
+                  each one is confirmed.
                 </p>
               </article>
             )}
@@ -125,7 +119,7 @@ export default function ProjectsPage() {
               <p>Tell us what you are looking for and we will get back to you with current availability.</p>
             </div>
             <div className="m-cta-do">
-              <a href="/#contact" className="m-btn m-btn--light">Enquire now <IconArrow /></a>
+              <Link to="/contact" className="m-btn m-btn--light">Enquire now <IconArrow /></Link>
               <Link to="/services" className="m-btn m-btn--light">Our services</Link>
             </div>
           </div>
