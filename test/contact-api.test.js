@@ -90,10 +90,12 @@ console.log('🧪 Starting Contact Enquiry Unit & Integration Tests...\n')
   console.log('✅ Test 5 Passed: HTML & Text email templates formatted accurately.')
 }
 
-// Test 6: processContactEnquiry in Dev / Test mode
+// Test 6: Missing API Key returns failure and does NOT fake success
 {
+  delete process.env.RESEND_API_KEY
+  delete process.env.EMAIL_API_KEY
   process.env.CONTACT_EMAIL = 'mrunalihajare5@gmail.com'
-  process.env.NODE_ENV = 'development'
+
   const result = await processContactEnquiry({
     name: 'Mrunali Hajare',
     email: 'mrunali@example.com',
@@ -102,10 +104,58 @@ console.log('🧪 Starting Contact Enquiry Unit & Integration Tests...\n')
     message: 'Hello, testing enquiry submission.',
   })
 
-  assert.strictEqual(result.statusCode, 200, 'Dev mode submission should return 200')
-  assert.strictEqual(result.body.success, true, 'Dev mode submission should succeed')
-  assert.ok(result.body.message.includes('Thank you'), 'Success message should be returned')
-  console.log('✅ Test 6 Passed: Full processContactEnquiry flow succeeded.')
+  assert.strictEqual(result.statusCode, 500, 'Missing API key should return 500 status')
+  assert.strictEqual(result.body.success, false, 'Missing API key must not report success')
+  assert.ok(result.body.error.includes('RESEND_API_KEY'), 'Error must mention missing RESEND_API_KEY')
+  console.log('✅ Test 6 Passed: Missing API key strictly returns error (no false success).')
 }
 
-console.log('\n🎉 ALL TESTS PASSED SUCCESSFULLY!\n')
+// Test 7: Mocked Provider Success & Error Handling
+{
+  // Test with simulated API response
+  const originalFetch = globalThis.fetch
+
+  // Simulate API failure
+  globalThis.fetch = async () => ({
+    ok: false,
+    status: 403,
+    json: async () => ({ message: 'Invalid API Key' }),
+  })
+  process.env.RESEND_API_KEY = 're_test_invalid_key'
+
+  const failResult = await processContactEnquiry({
+    name: 'Mrunali Hajare',
+    email: 'mrunali@example.com',
+    phone: '9876543210',
+    service: 'Premraj Vihar 2.0 — Ongoing',
+    message: 'Testing API failure.',
+  })
+  assert.strictEqual(failResult.statusCode, 500)
+  assert.strictEqual(failResult.body.success, false)
+  assert.strictEqual(failResult.body.error, 'Invalid API Key')
+  console.log('✅ Test 7 Passed: Resend API failure correctly returned as error to client.')
+
+  // Simulate API success
+  globalThis.fetch = async () => ({
+    ok: true,
+    status: 200,
+    json: async () => ({ id: 'email_12345' }),
+  })
+
+  const successResult = await processContactEnquiry({
+    name: 'Mrunali Hajare',
+    email: 'mrunali@example.com',
+    phone: '9876543210',
+    service: 'Premraj Vihar 2.0 — Ongoing',
+    message: 'Testing API success.',
+  })
+  assert.strictEqual(successResult.statusCode, 200)
+  assert.strictEqual(successResult.body.success, true)
+  assert.ok(successResult.body.message.includes('Thank you! Your enquiry has been sent successfully.'))
+  console.log('✅ Test 8 Passed: Successful Resend delivery returns 200 with success confirmation.')
+
+  // Restore fetch
+  globalThis.fetch = originalFetch
+}
+
+console.log('\n🎉 ALL 8 TESTS PASSED SUCCESSFULLY!\n')

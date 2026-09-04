@@ -1,6 +1,6 @@
 /**
  * Contact Enquiry API Handler
- * Handles enquiry form submissions and sends emails via Resend (or configured email service).
+ * Validates enquiry form submissions and sends emails via Resend API.
  */
 
 const DEFAULT_RECIPIENT = 'mrunalihajare5@gmail.com'
@@ -234,26 +234,14 @@ ${dateString}
  * Sends email via Resend API
  */
 export async function sendEmailWithProvider({ to, replyTo, subject, html, text }) {
-  const apiKey = process.env.EMAIL_API_KEY || process.env.RESEND_API_KEY
+  const apiKey = process.env.RESEND_API_KEY || process.env.EMAIL_API_KEY
   const fromEmail = process.env.FROM_EMAIL || `${BRAND_NAME} <onboarding@resend.dev>`
 
   if (!apiKey) {
-    // If running in development without key, log the enquiry for testing
-    console.warn('[Contact API] EMAIL_API_KEY / RESEND_API_KEY is not configured in environment variables.')
-    if (process.env.NODE_ENV !== 'production') {
-      console.log('--- ENQUIRY EMAIL PREVIEW (Dev Mode) ---')
-      console.log('To:', to)
-      console.log('Subject:', subject)
-      console.log('Body:\n', text)
-      console.log('----------------------------------------')
-      return {
-        ok: true,
-        devNotice: 'Email preview logged in console because EMAIL_API_KEY is not set.',
-      }
-    }
+    console.error('[Contact API] Missing RESEND_API_KEY in environment variables.')
     return {
       ok: false,
-      error: 'Email service is not configured. Please set EMAIL_API_KEY or RESEND_API_KEY in environment variables.',
+      error: 'Email service is not configured. Please set RESEND_API_KEY in environment variables.',
     }
   }
 
@@ -280,7 +268,7 @@ export async function sendEmailWithProvider({ to, replyTo, subject, html, text }
 
     if (!res.ok) {
       console.error('[Contact API] Resend API Error:', res.status, data)
-      const errorMsg = data.message || `Failed to send email (status ${res.status})`
+      const errorMsg = data.message || `Email delivery failed (status ${res.status})`
       return { ok: false, error: errorMsg }
     }
 
@@ -350,7 +338,6 @@ export async function processContactEnquiry(body) {
     body: {
       success: true,
       message: 'Thank you! Your enquiry has been sent successfully. Our team will get back to you soon.',
-      devNotice: sendResult.devNotice,
     },
   }
 }
