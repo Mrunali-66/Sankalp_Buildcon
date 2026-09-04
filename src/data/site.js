@@ -69,11 +69,12 @@ export const COMMIT_SUB = [
 ]
 
 export const PLATES = [
-  { g: 'ongoing', cls: 'p-narrow p-tall', src: 'assets/gallery/elevation-building.jpg', alt: 'Premraj Vihar 2.0 Architectural Elevation', cap: 'Premraj Vihar 2.0 · Architectural Elevation', no: '01' },
-  { g: 'ongoing', cls: 'p-wide', src: 'assets/gallery/rooftop-aerial.jpg', alt: 'Rooftop Garden & Amenities Aerial View', cap: 'Rooftop Amenities & Terrace Layout', no: '02' },
-  { g: 'progress', cls: 'p-wide', src: 'assets/gallery/site-plan-top.jpg', alt: 'Master Site Plan & Landscape Layout', cap: 'Master Site Layout & Landscape Plan', no: '03' },
-  { g: 'upcoming', cls: 'p-narrow', src: 'assets/projects/shree-krupa-1.jpg', alt: 'Shree Krupa Co-Op Society site', cap: 'Shree Krupa · Site Plan', no: '04' },
-  { g: 'progress', cls: '', src: 'assets/gallery/elevation-building.jpg', alt: 'Structure Work View', cap: 'Facade & Structure Detail', no: '05' },
+  { g: 'ongoing', cls: 'p-wide', src: '/assets/projects/premraj-vihar-2.jpg', alt: 'Premraj Vihar 2.0 Master Rooftop & Terrace Planning', cap: 'Premraj Vihar 2.0 · Master Rooftop & Terrace Plan', no: '01' },
+  { g: 'ongoing', cls: 'p-narrow', src: '/assets/projects/premraj-niketan.jpg', alt: 'Premraj Niketan 2.0 Contemporary Elevation', cap: 'Premraj Niketan 2.0 · Architectural Elevation', no: '02' },
+  { g: 'completed', cls: 'p-narrow', src: '/assets/projects/sai-sarth-night.jpg', alt: 'Sai Sarth Residency Illuminated Evening Architectural Lighting', cap: 'Sai Sarth Residency · Evening Architectural Lighting', no: '03' },
+  { g: 'completed', cls: 'p-narrow', src: '/assets/projects/minakshi-apartment.jpg', alt: 'Minakshi Apartment Facade & Balconies', cap: 'Minakshi Apartment · Opp. Tulja Bhavani Mandir', no: '04' },
+  { g: 'completed', cls: 'p-wide', src: '/assets/projects/kapila-society.jpg', alt: 'Kapila Society 3D Perspective & Terrace Overview', cap: 'Kapila Society · Mula Nagar, Old Sangvi', no: '05' },
+  { g: 'completed', cls: 'p-narrow', src: '/assets/projects/sai-sarth-residency.jpg', alt: 'Sai Sarth Residency Modern Elevation & Retail Frontage', cap: 'Sai Sarth Residency · Corner Elevation & Retail', no: '06' },
 ]
 
 export const PROJECT_OPTIONS = [
