@@ -127,6 +127,14 @@ export default function Services() {
           SECTION 01 — COMPREHENSIVE CAPABILITIES
           ════════════════════════════════════════════════ */}
       <section className="svc-capabilities-section">
+        {/* Subtle background architectural blueprint linework */}
+        <div className="svc-bg-watermark" aria-hidden="true">
+          <svg width="460" height="340" viewBox="0 0 460 340" fill="none" stroke="currentColor">
+            <path d="M120 300V90l130-45v255M250 45l150 55v200M250 110l150-10M120 135l130-20M120 200l130-20M120 265l130-20M250 175l150-10M250 240l150-10M40 300V150l80-35v185M40 205l80-15M40 260l80-15M210 45V20l70 12v13M320 100V75l55 18v7" strokeWidth="0.75" strokeDasharray="3 3" opacity="0.4" />
+            <path d="M30 300h390M120 90h130M250 45h150" strokeWidth="0.8" opacity="0.5" />
+          </svg>
+        </div>
+
         <div className="svc-container">
           {/* Header Row */}
           <div className="svc-header-wrap">
@@ -136,17 +144,33 @@ export default function Services() {
                 <span className="svc-eyebrow-line" aria-hidden="true" />
               </div>
               <h2 className="svc-heading">
-                Tailored services for home<br />
-                <em>buyers and society committees</em>
+                Tailored services for<br />
+                <em>home buyers and society committees</em>
               </h2>
               <p className="svc-lead-desc">
-                Every project is led directly by our founder, technical supervisors, and legal advisors —
-                ensuring clear communication without middle layers.
+                Every project is led directly by our founder, technical supervisors and legal advisors —
+                ensuring clear communication, transparency and hassle-free execution.
               </p>
+            </div>
+
+            <div className="svc-header-divider" aria-hidden="true" />
+
+            <div className="svc-header-editorial">
+              <div className="svc-header-brand-block">
+                <span className="svc-brand-building">Building</span>
+                <span className="svc-brand-living">Better Living</span>
+                <span className="svc-brand-sub">TRUST · QUALITY · COMMUNITY</span>
+              </div>
+              <div className="svc-header-pillars" aria-hidden="true">
+                <span>SPACES</span>
+                <span>PEOPLE</span>
+                <span>COMMUNITIES</span>
+                <span>A STRONGER TOMORROW</span>
+              </div>
             </div>
           </div>
 
-          {/* 6 Asymmetric Architectural Service Cards Grid */}
+          {/* 6 Editorial Architectural Service Cards Grid */}
           <div className="svc-cards-grid">
             {SERVICES_DATA.map((svc) => (
               <article className="svc-card" key={svc.number}>
@@ -156,21 +180,17 @@ export default function Services() {
                     <span className="svc-card-num-line" aria-hidden="true" />
                   </div>
 
-                  <div className="svc-card-icon-circle">
-                    <ServiceIcon type={svc.icon} />
-                  </div>
-
                   <h3 className="svc-card-title">{svc.title}</h3>
                   <p className="svc-card-desc">{svc.body}</p>
 
-                  {svc.to && (
-                    <a href={svc.to} className="svc-card-cta">
-                      <span>{svc.linkLabel}</span>
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <a href={svc.to || '#contact'} className="svc-card-cta" aria-label={`Learn more about ${svc.title}`}>
+                    <span>Learn more</span>
+                    <span className="svc-card-cta-icon" aria-hidden="true">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M5 12h14M12 5l7 7-7 7" />
                       </svg>
-                    </a>
-                  )}
+                    </span>
+                  </a>
                 </div>
 
                 <div className="svc-card-media">
@@ -180,9 +200,16 @@ export default function Services() {
                     className="svc-card-img"
                     loading="lazy"
                   />
+                  <div className="svc-card-media-fade" aria-hidden="true" />
                 </div>
               </article>
             ))}
+          </div>
+
+          {/* Bottom Editorial Bar */}
+          <div className="svc-capabilities-footer" aria-hidden="true">
+            <span className="svc-bottom-brand">SANKALP BUILDCON</span>
+            <span className="svc-bottom-tagline">CONSTRUCTING TRUST · BUILDING LIVES</span>
           </div>
         </div>
       </section>

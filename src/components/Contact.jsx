@@ -50,11 +50,12 @@ const CONTACT_DETAILS = [
 const EMPTY = { name: '', phone: '', email: '', project: '', message: '' }
 
 function isValid(field, value) {
-  const v = value.trim()
-  if (field === 'message') return true
-  if (!v) return false
+  const v = (value || '').trim()
+  if (field === 'name') return v.length > 0
   if (field === 'email') return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)
   if (field === 'phone') return v.replace(/\D/g, '').length >= 10
+  if (field === 'project') return v.length > 0
+  if (field === 'message') return v.length > 0
   return true
 }
 
@@ -69,21 +70,28 @@ export default function Contact() {
   const change = (field) => (e) => {
     const value = e.target.value
     setValues((v) => ({ ...v, [field]: value }))
-    if (bad[field]) setBad((b) => ({ ...b, [field]: !isValid(field, value) }))
+    if (bad[field]) {
+      setBad((b) => ({ ...b, [field]: !isValid(field, value) }))
+    }
   }
 
   const blur = (field) => () => {
-    if (values[field].trim()) setBad((b) => ({ ...b, [field]: !isValid(field, values[field]) }))
+    if (values[field].trim() || bad[field]) {
+      setBad((b) => ({ ...b, [field]: !isValid(field, values[field]) }))
+    }
   }
 
   const submit = async (e) => {
     e.preventDefault()
     setSendError('')
+    setDone(false)
+
     const next = {}
-    ;['name', 'phone', 'email', 'project'].forEach((f) => {
+    ;['name', 'phone', 'email', 'project', 'message'].forEach((f) => {
       next[f] = !isValid(f, values[f])
     })
     setBad(next)
+
     if (Object.values(next).some(Boolean)) {
       const first = Object.keys(next).find((f) => next[f])
       document.getElementById(`hcp-${first}`)?.focus()
@@ -91,17 +99,20 @@ export default function Contact() {
     }
 
     setSending(true)
-    const res = await sendEnquiry(values, { source: 'Home page' })
+    const res = await sendEnquiry(values, { source: 'Home page Contact Form' })
     setSending(false)
 
     if (!res.ok) {
-      setSendError(res.error || 'Something went wrong. Please call us instead.')
+      setSendError(res.error || 'Something went wrong while sending your enquiry. Please try again.')
       return
     }
 
     setDone(true)
     setValues(EMPTY)
-    doneRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    setBad({})
+    setTimeout(() => {
+      doneRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
+    }, 100)
   }
 
   const fc = (f) => `cp-field${bad[f] ? ' cp-field--bad' : ''}`
@@ -177,48 +188,48 @@ export default function Contact() {
             <form noValidate onSubmit={submit}>
               <div className="cp-form-row">
                 <div className={fc('name')}>
-                  <label htmlFor="hcp-name" className="cp-label">Name</label>
+                  <label htmlFor="hcp-name" className="cp-label">Full Name *</label>
                   <input
                     id="hcp-name" name="name" type="text" autoComplete="name"
                     placeholder="Your full name"
                     className="cp-input"
                     value={values.name} onChange={change('name')} onBlur={blur('name')}
                   />
-                  {bad.name && <span className="cp-err">Please enter your name.</span>}
+                  {bad.name && <span className="cp-err">Please enter your full name.</span>}
                 </div>
                 <div className={fc('phone')}>
-                  <label htmlFor="hcp-phone" className="cp-label">Phone</label>
+                  <label htmlFor="hcp-phone" className="cp-label">Phone Number *</label>
                   <input
                     id="hcp-phone" name="phone" type="tel" inputMode="tel" autoComplete="tel"
                     placeholder="Your phone number"
                     className="cp-input"
                     value={values.phone} onChange={change('phone')} onBlur={blur('phone')}
                   />
-                  {bad.phone && <span className="cp-err">Enter a valid number.</span>}
+                  {bad.phone && <span className="cp-err">Enter a valid phone (at least 10 digits).</span>}
                 </div>
               </div>
 
               <div className={fc('email')}>
-                <label htmlFor="hcp-email" className="cp-label">Email</label>
+                <label htmlFor="hcp-email" className="cp-label">Email Address *</label>
                 <input
                   id="hcp-email" name="email" type="email" autoComplete="email"
                   placeholder="Your email address"
                   className="cp-input"
                   value={values.email} onChange={change('email')} onBlur={blur('email')}
                 />
-                {bad.email && <span className="cp-err">Enter a valid email.</span>}
+                {bad.email && <span className="cp-err">Enter a valid email address.</span>}
               </div>
 
               <div className={fc('project')}>
-                <label htmlFor="hcp-project" className="cp-label">Project of interest</label>
+                <label htmlFor="hcp-project" className="cp-label">Service / Project of interest *</label>
                 <div className="cp-select-wrap">
                   <select
                     id="hcp-project" name="project"
                     className="cp-select"
                     value={values.project} onChange={change('project')} onBlur={blur('project')}
                   >
-                    <option value="">Select an option</option>
-                    {PROJECT_OPTIONS.map((o) => <option key={o}>{o}</option>)}
+                    <option value="">Select a service or project</option>
+                    {PROJECT_OPTIONS.map((o) => <option key={o} value={o}>{o}</option>)}
                   </select>
                   <svg className="cp-select-arrow" viewBox="0 0 12 8" fill="none" stroke="currentColor" strokeWidth="1.6">
                     <path d="M1 1l5 5 5-5" />
@@ -227,35 +238,36 @@ export default function Contact() {
                 {bad.project && <span className="cp-err">Please choose an option.</span>}
               </div>
 
-              <div className="cp-field">
-                <label htmlFor="hcp-message" className="cp-label">Message</label>
+              <div className={fc('message')}>
+                <label htmlFor="hcp-message" className="cp-label">Message *</label>
                 <textarea
                   id="hcp-message" name="message"
-                  placeholder="Tell us about your requirement..."
+                  placeholder="Tell us about your requirement or project..."
                   className="cp-textarea"
-                  value={values.message} onChange={change('message')}
+                  value={values.message} onChange={change('message')} onBlur={blur('message')}
                 />
+                {bad.message && <span className="cp-err">Please enter your message.</span>}
               </div>
 
               <button type="submit" className="cp-submit" disabled={sending}>
-                {sending ? 'Sending…' : 'Submit enquiry'}
+                {sending ? 'Sending...' : 'Send Enquiry'}
               </button>
 
               <p className="cp-form-note">
-                Your enquiry is emailed to the Sankalp Buildcon team.
+                Your enquiry is emailed directly to the Sankalp Buildcon team.
               </p>
 
               {sendError && (
                 <div className="cp-done cp-done--error" role="alert">
-                  <strong>Could not send your enquiry.</strong>
-                  <span>{sendError} You can also call us on the number above.</span>
+                  <strong>Something went wrong while sending your enquiry.</strong>
+                  <span>{sendError}</span>
                 </div>
               )}
 
               {done && (
                 <div className="cp-done" ref={doneRef} role="status" aria-live="polite">
-                  <strong>Thank you — your enquiry has been sent.</strong>
-                  <span>The Sankalp Buildcon team will get back to you shortly.</span>
+                  <strong>Thank you! Your enquiry has been sent successfully.</strong>
+                  <span>Our team will get back to you soon.</span>
                 </div>
               )}
             </form>
