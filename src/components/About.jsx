@@ -229,7 +229,7 @@ export default function About() {
                   </svg>
                 </div>
                 <div className="about-mstat-info">
-                  <strong className="about-mstat-num">150+</strong>
+                  <strong className="about-mstat-num">100+</strong>
                   <span className="about-mstat-lbl">Projects Completed</span>
                 </div>
               </div>

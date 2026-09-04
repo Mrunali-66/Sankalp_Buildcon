@@ -13,6 +13,7 @@ import Commitments from './components/Commitments.jsx'
 import Gallery from './components/Gallery.jsx'
 import Contact from './components/Contact.jsx'
 import Footer from './components/Footer.jsx'
+import FloatingSocials from './components/FloatingSocials.jsx'
 import useScrollSpy from './hooks/useScrollSpy.js'
 import useBodyLock from './hooks/useBodyLock.js'
 import { NAV } from './data/site.js'
@@ -53,13 +54,25 @@ export default function App() {
     return () => cancelAnimationFrame(id)
   }, [])
 
-  // Listen for browser Back/Forward navigation
+  // Listen for browser Back/Forward navigation and hash scrolling
   useEffect(() => {
     const handlePopState = () => {
       const slug = getInitialProjectSlug()
       setProjectSlug(slug)
     }
 
+    const handleHashScroll = () => {
+      const hash = window.location.hash
+      if (hash && hash.startsWith('#') && !hash.startsWith('#projects/')) {
+        const targetId = hash.replace('#', '')
+        const el = document.getElementById(targetId)
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' })
+        }
+      }
+    }
+
+    handleHashScroll()
     window.addEventListener('popstate', handlePopState)
     window.addEventListener('hashchange', handlePopState)
     return () => {
@@ -144,6 +157,7 @@ export default function App() {
       )}
 
       <Footer onOpen={navigateToProject} />
+      <FloatingSocials />
     </>
   )
 }

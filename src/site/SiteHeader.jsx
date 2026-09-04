@@ -3,17 +3,16 @@ import { Link, NavLink } from 'react-router-dom'
 import MARK from '../logoMark.js'
 import { IconArrow } from '../pages/icons.jsx'
 
-// Anchor links point back to the single-page Home; routed links use <NavLink>.
 const LINKS = [
-  { label: 'Home', to: '/' },
+  { label: 'Home', href: '/#home' },
   { label: 'About Us', href: '/#about' },
   { label: 'Our Founder', href: '/#founder' },
-  { label: 'Projects', to: '/projects' },
+  { label: 'Projects', href: '/#projects' },
   { label: 'Redevelopment', href: '/#redevelopment' },
-  { label: 'Services', to: '/services' },
-  { label: 'Quality & Specifications', to: '/quality' },
+  { label: 'Services', href: '/#services' },
+  { label: 'Quality & Specifications', href: '/#quality' },
   { label: 'Gallery', href: '/#gallery' },
-  { label: 'Contact', to: '/contact' },
+  { label: 'Contact', href: '/#contact' },
 ]
 
 function Logo() {
@@ -22,8 +21,8 @@ function Logo() {
     <Link to="/" className="m-brand" aria-label="Sankalp Buildcon — home">
       <img src={src} alt="Sankalp Buildcon" onError={() => setSrc(MARK)} />
       <span className="m-brand-txt">
-        <span className="m-brand-name">Sankalp Buildcon</span>
-        <span className="m-brand-tag">Building Trust. Creating Better Futures.</span>
+        <span className="m-brand-name">SANKALP</span>
+        <span className="m-brand-subname">BUILDCON</span>
       </span>
     </Link>
   )

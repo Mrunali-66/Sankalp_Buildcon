@@ -5,6 +5,8 @@
    soft shadows, pill buttons, rounded icon tiles.
    Everything is namespaced under .mod so it never collides with styles.css.
    ========================================================================== */
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+section, [id], div[id], .mod[id], .srv-page, .qp-page{scroll-margin-top:76px !important}
 .mod{
   --navy:#0B2E71;
   --navy-deep:#082257;
@@ -87,12 +89,12 @@
    SITE HEADER
    ========================================================================== */
 .m-head{position:sticky;top:0;z-index:80;background:#fff;border-bottom:1px solid var(--line)}
-.m-head-in{display:flex;align-items:center;justify-content:space-between;gap:24px;height:78px}
-.m-brand{display:flex;align-items:center;gap:12px}
-.m-brand img{height:46px;width:auto}
-.m-brand .m-brand-txt{display:flex;flex-direction:column;line-height:1.05}
-.m-brand .m-brand-name{font-family:var(--font);font-weight:800;font-size:18px;letter-spacing:.01em;color:var(--navy)}
-.m-brand .m-brand-tag{font-size:10.5px;font-weight:500;color:var(--slate-soft);letter-spacing:.02em;margin-top:3px}
+.m-head-in{display:flex;align-items:center;justify-content:space-between;gap:24px;height:104px}
+.m-brand{display:flex;align-items:center;gap:6px}
+.m-brand img{height:120px;width:auto}
+.m-brand .m-brand-txt{display:flex;flex-direction:column;align-items:center;line-height:1.1}
+.m-brand .m-brand-name{font-family:var(--font);font-weight:800;font-size:30px;letter-spacing:.08em;color:var(--navy);text-align:center}
+.m-brand .m-brand-subname{display:block;font-family:var(--font);font-weight:700;font-size:13px;letter-spacing:.35em;color:var(--blue);text-align:center;margin-top:3px}
 .m-nav{display:flex;align-items:center;gap:20px}
 .mod .m-nav a{
   font-family:var(--font);font-weight:500;font-size:13.5px;color:var(--ink);
@@ -254,37 +256,49 @@
 /* ==========================================================================
    SITE FOOTER (DARK DEEP NAVY)
    ========================================================================== */
-.m-foot{background:#061737;color:#9DB2D6;padding-top:64px;padding-bottom:28px}
-.m-foot-in{display:flex;flex-direction:column}
+.m-foot{
+  background:#061737;
+  color:#9DB2D6;
+  padding-top:44px;
+  padding-bottom:24px;
+  padding-inline:clamp(20px, 4vw, 40px);
+}
+.m-foot-in{
+  display:flex;
+  flex-direction:column;
+  max-width:1240px;
+  margin-inline:auto;
+  width:100%;
+}
 .m-foot-grid{
   display:grid;
-  grid-template-columns:1.5fr 1fr 1fr 1.1fr 1.3fr;
-  gap:36px;
-  padding-bottom:52px;
+  grid-template-columns:1.4fr 0.9fr 0.9fr 1.1fr 1.3fr;
+  gap:28px;
+  padding-bottom:36px;
   border-bottom:1px solid rgba(255,255,255,.1);
 }
 .m-brand--foot .m-brand-name{color:#fff;font-weight:800;font-size:16px;letter-spacing:.05em}
 .m-brand--foot .m-brand-subname{display:block;color:#7E95C4;font-weight:700;font-size:10px;letter-spacing:.15em;margin-top:-2px}
-.m-foot-tagline{margin-top:16px;font-size:14px;color:#A5B8DC;line-height:1.5;font-weight:500}
+.m-foot-tagline{margin-top:12px;font-size:13.5px;color:#A5B8DC;line-height:1.45;font-weight:500}
 
 .m-foot-card{
   background:rgba(255,255,255,.04);
   border:1px solid rgba(255,255,255,.08);
-  border-radius:12px;
-  padding:16px;
-  margin-top:20px;
+  border-radius:10px;
+  padding:12px 14px;
+  margin-top:14px;
 }
-.m-foot-card-head{display:flex;align-items:center;gap:10px;color:#fff;font-weight:700;font-size:13.5px}
+.m-foot-card-head{display:flex;align-items:center;gap:10px;color:#fff;font-weight:700;font-size:13px}
 .m-foot-card-icon{
-  width:28px;height:28px;border-radius:8px;
+  width:26px;height:26px;border-radius:7px;
   background:rgba(47,107,246,.2);color:#9EC0FF;
   display:flex;align-items:center;justify-content:center;flex:none;
 }
-.m-foot-card p{font-size:12.5px;color:#8AA2CB;line-height:1.6;margin-top:10px}
+.m-foot-card p{font-size:12px;color:#8AA2CB;line-height:1.55;margin-top:8px}
 
-.m-foot-socials{display:flex;gap:12px;margin-top:20px}
+.m-foot-socials{display:flex;gap:10px;margin-top:14px}
 .m-foot-socials a{
-  width:34px;height:34px;border-radius:50%;
+  width:32px;height:32px;border-radius:50%;
   border:1px solid rgba(255,255,255,.18);
   color:#9DB2D6;display:flex;align-items:center;justify-content:center;
   transition:all .2s ease;
@@ -293,49 +307,53 @@
 
 .m-foot-col h4{
   font-family:var(--font);font-size:13px;font-weight:700;
-  color:#fff;margin-bottom:20px;letter-spacing:.02em;
+  color:#fff;margin-bottom:14px;letter-spacing:.02em;
 }
 .m-foot-links,.m-foot-links-arrows{list-style:none;padding:0;margin:0}
-.m-foot-links li,.m-foot-links-arrows li{margin-bottom:14px}
+.m-foot-links li,.m-foot-links-arrows li{margin-bottom:10px}
 .m-foot-links a,.m-foot-links-arrows a{
-  font-size:14px;color:#9DB2D6;transition:color .2s ease;
+  font-size:13.5px;color:#9DB2D6;transition:color .2s ease;
   display:flex;align-items:center;justify-content:space-between;
 }
 .m-foot-links a:hover,.m-foot-links-arrows a:hover{color:#fff}
-.m-foot-links-arrows span{color:rgba(255,255,255,.3);font-size:14px}
+.m-foot-links-arrows span{color:rgba(255,255,255,.3);font-size:13px}
 
 .m-foot-col--touch{display:flex;flex-direction:column}
-.m-foot-contact-list{display:flex;flex-direction:column;gap:16px;margin-bottom:24px}
-.m-foot-contact-item{display:flex;align-items:flex-start;gap:12px}
+.m-foot-contact-list{display:flex;flex-direction:column;gap:12px;margin-bottom:18px}
+.m-foot-contact-item{display:flex;align-items:flex-start;gap:10px}
 .m-foot-icon-wrap{
-  width:30px;height:30px;border-radius:50%;
+  width:28px;height:28px;border-radius:50%;
   background:rgba(255,255,255,.06);color:#9EC0FF;
   display:flex;align-items:center;justify-content:center;flex:none;margin-top:2px;
 }
-.m-foot-c-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#6E86B6;margin-bottom:2px}
-.m-foot-c-val{font-size:13.5px;color:#D3DEF2;line-height:1.5;text-decoration:none}
+.m-foot-c-label{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#6E86B6;margin-bottom:2px}
+.m-foot-c-val{font-size:13px;color:#D3DEF2;line-height:1.45;text-decoration:none}
 a.m-foot-c-val:hover{color:#fff}
 
 .m-foot-cta-btn{
   align-self:flex-start;margin-top:auto;
-  padding:10px 22px;font-size:13.5px;border-radius:999px;
+  padding:8.5px 20px;font-size:13px;border-radius:999px;
   background:var(--blue);color:#fff;box-shadow:0 4px 14px rgba(47,107,246,.3);
 }
 
 .m-foot-bottom{
-  padding-top:24px;
+  padding-top:20px;
   display:flex;
   align-items:center;
   justify-content:space-between;
   gap:16px;
   flex-wrap:wrap;
-  font-size:13px;
-  color:#6E86B6;
+  width:100%;
+}
+.m-foot-copy{
+  font-size:12.5px;
+  color:#7A92C2;
 }
 .m-foot-credit{
   font-size:12px;
   color:#7A92C2;
   letter-spacing:0.02em;
+  text-align:right;
 }
 .m-foot-agency{
   color:#A8C4FF;

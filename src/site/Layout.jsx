@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
 import SiteHeader from './SiteHeader.jsx'
 import SiteFooter from './SiteFooter.jsx'
+import FloatingSocials from '../components/FloatingSocials.jsx'
 import '../theme-modern.css'
 
 export default function Layout() {
@@ -19,6 +20,7 @@ export default function Layout() {
         <Outlet />
       </main>
       <SiteFooter />
+      <FloatingSocials />
     </div>
   )
 }
