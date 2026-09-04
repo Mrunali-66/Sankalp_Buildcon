@@ -3,17 +3,16 @@ import { Link, NavLink } from 'react-router-dom'
 import MARK from '../logoMark.js'
 import { IconArrow } from '../pages/icons.jsx'
 
-// Anchor links point back to the single-page Home; routed links use <NavLink>.
 const LINKS = [
-  { label: 'Home', to: '/' },
+  { label: 'Home', href: '/#home' },
   { label: 'About Us', href: '/#about' },
   { label: 'Our Founder', href: '/#founder' },
-  { label: 'Projects', to: '/projects' },
+  { label: 'Projects', href: '/#projects' },
   { label: 'Redevelopment', href: '/#redevelopment' },
-  { label: 'Services', to: '/services' },
-  { label: 'Quality & Specifications', to: '/quality' },
+  { label: 'Services', href: '/#services' },
+  { label: 'Quality & Specifications', href: '/#quality' },
   { label: 'Gallery', href: '/#gallery' },
-  { label: 'Contact', to: '/contact' },
+  { label: 'Contact', href: '/#contact' },
 ]
 
 function Logo() {

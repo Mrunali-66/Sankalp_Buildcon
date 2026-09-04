@@ -5,6 +5,8 @@
    soft shadows, pill buttons, rounded icon tiles.
    Everything is namespaced under .mod so it never collides with styles.css.
    ========================================================================== */
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+section, [id], div[id], .mod[id], .srv-page, .qp-page{scroll-margin-top:76px !important}
 .mod{
   --navy:#0B2E71;
   --navy-deep:#082257;

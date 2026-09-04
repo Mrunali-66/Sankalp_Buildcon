@@ -40,13 +40,13 @@
   /* sheet */
   --pad:clamp(20px,5vw,72px);
   --rail:110px;
-  --band:clamp(72px,8vw,124px);
+  --band:clamp(44px, 5.2vw, 68px);
 }
 
 *,*::before,*::after{box-sizing:border-box}
 *{margin:0;padding:0}
-html{scroll-behavior:smooth;scroll-padding-top:100px;-webkit-text-size-adjust:100%}
-section, [id]{scroll-margin-top:96px}
+html{scroll-behavior:smooth;scroll-padding-top:76px;-webkit-text-size-adjust:100%}
+section, [id], div[id], .mod[id], .srv-page, .qp-page{scroll-margin-top:76px !important}
 body{
   font-family:var(--sans);font-size:16px;line-height:1.7;
   color:var(--graphite);background:var(--paper);

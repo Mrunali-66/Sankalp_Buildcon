@@ -53,13 +53,25 @@ export default function App() {
     return () => cancelAnimationFrame(id)
   }, [])
 
-  // Listen for browser Back/Forward navigation
+  // Listen for browser Back/Forward navigation and hash scrolling
   useEffect(() => {
     const handlePopState = () => {
       const slug = getInitialProjectSlug()
       setProjectSlug(slug)
     }
 
+    const handleHashScroll = () => {
+      const hash = window.location.hash
+      if (hash && hash.startsWith('#') && !hash.startsWith('#projects/')) {
+        const targetId = hash.replace('#', '')
+        const el = document.getElementById(targetId)
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' })
+        }
+      }
+    }
+
+    handleHashScroll()
     window.addEventListener('popstate', handlePopState)
     window.addEventListener('hashchange', handlePopState)
     return () => {
