@@ -162,7 +162,7 @@ export default function SiteFooter() {
         </div>
 
         <div className="m-foot-bottom">
-          <span>© 2026 Sankalp Buildcon. All Rights Reserved.</span>
+          <span className="m-foot-copy">© 2026 Sankalp Buildcon. All Rights Reserved.</span>
           <div className="m-foot-credit">
             Designed &amp; Developed by <span className="m-foot-agency">AquaLion Digital</span>
           </div>
