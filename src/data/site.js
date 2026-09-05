@@ -9,7 +9,6 @@ export const NAV = [
   { id: 'services', label: 'Services' },
   { id: 'quality', label: 'Quality & Specifications' },
   { id: 'gallery', label: 'Gallery' },
-  { id: 'contact', label: 'Contact' },
 ]
 
 // Home-page anchor for a nav item, or a real route if it has one.

@@ -56,8 +56,8 @@ section, [id], div[id], .mod[id], .srv-page, .qp-page{scroll-margin-top:76px !im
   white-space:nowrap;
 }
 .m-btn svg{width:16px;height:16px}
-.mod .m-btn--solid{background:var(--blue);color:#fff;box-shadow:0 16px 30px -14px rgba(47,107,246,.6)}
-.mod .m-btn--solid:hover{background:var(--blue-600);transform:translateY(-2px)}
+.mod .m-btn--solid{background:var(--btn-secondary-bg, #334155);color:var(--btn-secondary-text, #FFFFFF);box-shadow:0 12px 28px -10px rgba(51,65,85,.4)}
+.mod .m-btn--solid:hover{background:var(--btn-secondary-hover, #1E293B);transform:translateY(-2px);box-shadow:0 16px 32px -8px rgba(30,41,59,.5)}
 .mod .m-btn--ghost{background:#fff;color:var(--blue);border:1.5px solid var(--line)}
 .mod .m-btn--ghost:hover{border-color:var(--blue);transform:translateY(-2px)}
 .mod .m-btn--light{background:rgba(255,255,255,.12);color:#fff;border:1.5px solid rgba(255,255,255,.35)}
@@ -1383,8 +1383,6 @@ td.qp-td-cat>.qp-cat-icon{
 a.cp-btn-call, button.cp-btn-call,
 a.cp-btn-wa, button.cp-btn-wa,
 button.cp-submit, .cp-submit {
-  background:#2F6BF6 !important;
-  color:#FFFFFF !important;
   display:inline-flex !important;
   align-items:center !important;
   justify-content:center !important;
@@ -1395,20 +1393,51 @@ button.cp-submit, .cp-submit {
   font-weight:700 !important;
   font-size:15px !important;
   text-decoration:none !important;
-  box-shadow:0 6px 20px rgba(47,107,246,.35) !important;
   border:none !important;
   cursor:pointer !important;
   transition:all .25s ease !important;
   box-sizing:border-box !important;
 }
 
-a.cp-btn-call:hover, button.cp-btn-call:hover,
-a.cp-btn-wa:hover, button.cp-btn-wa:hover,
+/* Primary Action: Send Enquiry (.cp-submit) */
+button.cp-submit, .cp-submit {
+  width:100% !important;
+  background:var(--btn-primary-bg, #0A2240) !important;
+  color:#FFFFFF !important;
+  box-shadow:0 6px 20px rgba(10,34,64,.28) !important;
+  margin-top:12px !important;
+}
 button.cp-submit:hover, .cp-submit:hover {
-  background:#1B57D8 !important;
+  background:var(--btn-primary-hover, #1B6DB4) !important;
   color:#FFFFFF !important;
   transform:translateY(-2px) !important;
-  box-shadow:0 10px 24px rgba(47,107,246,.45) !important;
+  box-shadow:0 10px 24px rgba(27,109,180,.4) !important;
+}
+
+/* Secondary Action: Call Us (.cp-btn-call) */
+a.cp-btn-call, button.cp-btn-call {
+  background:var(--btn-secondary-bg, #334155) !important;
+  color:var(--btn-secondary-text, #FFFFFF) !important;
+  box-shadow:0 6px 20px rgba(51,65,85,.3) !important;
+}
+a.cp-btn-call:hover, button.cp-btn-call:hover {
+  background:var(--btn-secondary-hover, #1E293B) !important;
+  color:#FFFFFF !important;
+  transform:translateY(-2px) !important;
+  box-shadow:0 10px 24px rgba(30,41,59,.42) !important;
+}
+
+/* Utility Action: WhatsApp Us (.cp-btn-wa) */
+a.cp-btn-wa, button.cp-btn-wa {
+  background:linear-gradient(135deg, #25D366, #128C7E) !important;
+  color:#FFFFFF !important;
+  box-shadow:0 6px 20px rgba(37,211,102,.3) !important;
+}
+a.cp-btn-wa:hover, button.cp-btn-wa:hover {
+  background:linear-gradient(135deg, #20BA5A, #0F7A6E) !important;
+  color:#FFFFFF !important;
+  transform:translateY(-2px) !important;
+  box-shadow:0 10px 24px rgba(37,211,102,.42) !important;
 }
 
 a.cp-btn-call svg, button.cp-btn-call svg,
@@ -1420,13 +1449,8 @@ button.cp-submit svg, .cp-submit svg {
   flex:none !important;
 }
 
-a.cp-btn-wa svg path[fill], button.cp-btn-wa svg path {
+a.cp-btn-wa svg path, button.cp-btn-wa svg path {
   fill:#FFFFFF !important;
-}
-
-button.cp-submit, .cp-submit {
-  width:100% !important;
-  margin-top:12px !important;
 }
 
 .cp-pending-note{font-size:13px;color:var(--slate-soft);font-style:italic}

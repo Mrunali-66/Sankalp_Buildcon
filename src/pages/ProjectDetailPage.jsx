@@ -65,9 +65,9 @@ export default function ProjectDetailPage() {
                   </div>
                 ))}
               </dl>
-              <Link to="/contact" className="m-btn m-btn--solid">
+              <a href="/#contact" className="m-btn m-btn--solid">
                 Enquire about this project <IconArrow />
-              </Link>
+              </a>
             </aside>
           </div>
         </div>
@@ -129,7 +129,7 @@ export default function ProjectDetailPage() {
               <p>We can arrange a site visit and walk you through the current stage of work.</p>
             </div>
             <div className="m-cta-do">
-              <Link to="/contact" className="m-btn m-btn--light">Request a site visit <IconArrow /></Link>
+              <a href="/#contact" className="m-btn m-btn--light">Request a site visit <IconArrow /></a>
               <Link to="/projects" className="m-btn m-btn--light">All projects</Link>
             </div>
           </div>

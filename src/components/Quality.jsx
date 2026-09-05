@@ -112,9 +112,9 @@ export default function Quality() {
             </p>
 
             <div className="qp-hero-actions" data-reveal data-delay="200">
-              <Link to="/contact" className="m-btn m-btn--solid">
+              <a href="#contact" className="m-btn m-btn--solid">
                 Talk to us <IconArrow />
-              </Link>
+              </a>
               <Link to="/projects" className="m-btn m-btn--ghost">
                 Our projects
               </Link>
@@ -235,9 +235,9 @@ export default function Quality() {
               </p>
             </div>
             <div className="qp-cta-actions">
-              <Link to="/contact" className="m-btn m-btn--white">
+              <a href="#contact" className="m-btn m-btn--white">
                 Arrange a visit <IconArrow />
-              </Link>
+              </a>
               <Link to="/projects" className="m-btn m-btn--outline-white">
                 View projects
               </Link>
