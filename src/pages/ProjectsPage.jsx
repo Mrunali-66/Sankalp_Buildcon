@@ -119,7 +119,7 @@ export default function ProjectsPage() {
               <p>Tell us what you are looking for and we will get back to you with current availability.</p>
             </div>
             <div className="m-cta-do">
-              <Link to="/contact" className="m-btn m-btn--light">Enquire now <IconArrow /></Link>
+              <a href="/#contact" className="m-btn m-btn--light">Enquire now <IconArrow /></a>
               <Link to="/services" className="m-btn m-btn--light">Our services</Link>
             </div>
           </div>

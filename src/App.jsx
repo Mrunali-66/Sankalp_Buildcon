@@ -19,7 +19,7 @@ import useBodyLock from './hooks/useBodyLock.js'
 import { NAV } from './data/site.js'
 import { getProjectBySlug } from './data/projects.js'
 
-const SECTION_IDS = NAV.map((n) => n.id)
+const SECTION_IDS = [...NAV.map((n) => n.id), 'contact']
 
 // Helper to inspect current URL path or hash for dedicated project route
 function getInitialProjectSlug() {
@@ -65,9 +65,17 @@ export default function App() {
       const hash = window.location.hash
       if (hash && hash.startsWith('#') && !hash.startsWith('#projects/')) {
         const targetId = hash.replace('#', '')
-        const el = document.getElementById(targetId)
-        if (el) {
-          el.scrollIntoView({ behavior: 'smooth' })
+        if (projectSlug) {
+          setProjectSlug(null)
+          setTimeout(() => {
+            const el = document.getElementById(targetId)
+            if (el) el.scrollIntoView({ behavior: 'smooth' })
+          }, 50)
+        } else {
+          const el = document.getElementById(targetId)
+          if (el) {
+            el.scrollIntoView({ behavior: 'smooth' })
+          }
         }
       }
     }

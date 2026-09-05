@@ -93,7 +93,7 @@ export default function SiteFooter() {
               <li><Link to="/services">Services</Link></li>
               <li><Link to="/quality">Quality &amp; Specifications</Link></li>
               <li><a href="/#gallery">Gallery</a></li>
-              <li><Link to="/contact">Contact</Link></li>
+              <li><a href="/#contact">Contact Us</a></li>
             </ul>
           </div>
 
@@ -154,9 +154,9 @@ export default function SiteFooter() {
               </div>
             </div>
 
-            <Link to="/contact" className="m-btn m-btn--solid m-foot-cta-btn">
+            <a href="/#contact" className="m-btn m-btn--solid m-foot-cta-btn">
               Enquire now <IconArrow />
-            </Link>
+            </a>
           </div>
 
         </div>

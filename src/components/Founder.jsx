@@ -114,7 +114,7 @@ export default function Founder() {
               </div>
               <img
                 src="/assets/founder/founder-portrait.png"
-                alt="Ramesh Jadhav, Founder & Managing Director of Sankalp Buildcon"
+                alt="Mr. Sandip Chandrakant Shitole, Founder & Managing Director of Sankalp Buildcon"
                 className="founder-portrait-img"
                 loading="eager"
               />
@@ -136,13 +136,8 @@ export default function Founder() {
 
               {/* Bottom Card Content with Signature */}
               <div className="founder-card-content">
-                {/* Elegant Signature */}
-                <div className="founder-signature-wrap" aria-label="Ramesh Jadhav signature">
-                  <span className="founder-script-sig">Ramesh Jadhav</span>
-                </div>
-
-                <div className="founder-name-group">
-                  <h3 className="founder-name-text">RAMESH JADHAV</h3>
+                <div className="founder-signature-wrap" aria-label="Mr. Sandip Chandrakant Shitole signature">
+                  <h3 className="founder-script-sig">Mr. Sandip Chandrakant Shitole</h3>
                   <p className="founder-role-text">Founder &amp; Managing Director</p>
                 </div>
 
@@ -273,7 +268,7 @@ export default function Founder() {
               &ldquo;Great buildings are not just made of concrete and steel, they are built on trust, teamwork, and a vision for a better future.&rdquo;
             </blockquote>
             <div className="founder-quote-author">
-              <span className="founder-quote-dash">—</span> Ramesh Jadhav
+              <span className="founder-quote-dash">—</span> Mr. Sandip Chandrakant Shitole
             </div>
           </div>
         </div>

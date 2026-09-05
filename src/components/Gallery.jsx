@@ -1,16 +1,4 @@
-import { useState } from 'react'
-
-const FILTERS = [
-  { key: 'all', label: 'All Projects' },
-  { key: 'completed', label: 'Completed' },
-  { key: 'ongoing', label: 'Ongoing' },
-  { key: 'redevelopment', label: 'Redevelopment' },
-  { key: 'construction', label: 'Construction' },
-]
-
 export default function Gallery({ onOpenProject }) {
-  const [filter, setFilter] = useState('all')
-
   return (
     <section className="gallery-editorial-section" id="gallery">
       <div className="gallery-editorial-container">
@@ -28,23 +16,6 @@ export default function Gallery({ onOpenProject }) {
             <p className="gallery-editorial-sub">
               Explore a selection of our residential developments, redevelopment projects, construction progress, and completed spaces.
             </p>
-          </div>
-
-          {/* Filter Categories */}
-          <div className="gallery-editorial-nav" role="group" aria-label="Filter gallery">
-            {FILTERS.map((f) => {
-              const isActive = filter === f.key
-              return (
-                <button
-                  key={f.key}
-                  type="button"
-                  className={`gallery-nav-btn ${isActive ? 'is-active' : ''}`}
-                  onClick={() => setFilter(f.key)}
-                >
-                  {f.label}
-                </button>
-              )
-            })}
           </div>
         </div>
 
